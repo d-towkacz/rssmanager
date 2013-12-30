@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-12-30T16:09:33Z" product-name="q8y_rssmanager">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_q8yrssmanager_domain_model_rssmanager">
+				<source>Rssmanager</source>
+			</trans-unit>
+			<trans-unit id="tx_q8yrssmanager_domain_model_rssmanager.feedurl">
+				<source>feedurl</source>
+			</trans-unit>
+			<trans-unit id="tx_q8yrssmanager_domain_model_rssmanager.feedtitle">
+				<source>feedtitle</source>
+			</trans-unit>
+			<trans-unit id="tx_q8yrssmanager_domain_model_rssmanager.feeddate">
+				<source>feeddate</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>
