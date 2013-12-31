@@ -34,7 +34,7 @@ namespace TYPO3\Q8yRssmanager\Controller;
  */
  
 
-include_once(PATH_tslib.'typo3conf/ext/q8y_rssmanager/autoloader.php');
+include_once(PATH_site.'typo3conf/ext/q8y_rssmanager/Classes/Util/autoloader.php');
 
  
 class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
@@ -79,10 +79,33 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function createAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager) {
 		$feed_url = $newRssmanager->getFeedurl();
-		$feed = new \TYPO3\Q8yRssmanager\Util\autoloader;
-		//$feed->set_feed_url($url);
-		//$feed->init();
+		$feed = new \SimplePie;
 		
+		
+		$feed->set_feed_url($feed_url);
+		$feed->init();
+		
+		if ($feed->error == "")
+		{
+			$feed_link = $feed->get_link();
+			//print_r($feed_link);
+			$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
+			$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
+			$feed_exist = $repoFeed->findFeed($feed_link);
+			if (count($feed_exist) > 0)
+			{
+				$feed_uid = $feed_exist[0]['uid'];
+				$userData = $repoUser->findUser(11316);
+				print_r($userData);
+			}
+			else
+			{
+				
+			}
+			
+			
+		}
+		//print_r($feed);
 		exit;
 		$this->rssmanagerRepository->add($newRssmanager);
 		$this->flashMessageContainer->add('Your new Rssmanager was created.');
