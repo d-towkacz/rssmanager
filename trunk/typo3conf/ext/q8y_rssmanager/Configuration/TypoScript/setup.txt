@@ -6,6 +6,7 @@ plugin.tx_q8yrssmanager {
 	}
 	persistence {
 		storagePid = {$plugin.tx_q8yrssmanager.persistence.storagePid}
+		
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
@@ -37,3 +38,15 @@ plugin.tx_q8yrssmanager._CSS_DEFAULT_STYLE (
 		vertical-align:top;
 	}
 )
+
+config.tx_extbase.persistence.classes {
+\TYPO3\Q8yRssmanager\Domain\Model\User {
+	 mapping {
+                    tableName = fe_users
+                    columns {
+                          #first_name.mapOnProperty = firstName
+                          name.mapOnProperty = name
+                    }
+                }
+       }
+}
