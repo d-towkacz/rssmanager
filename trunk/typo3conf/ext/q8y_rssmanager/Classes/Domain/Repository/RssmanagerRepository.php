@@ -47,7 +47,7 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
 		$query->statement('INSERT INTO tx_q8yrssmanager_domain_model_rssmanager (feedurl, feedtitle, feeddate) VALUES (?, ?, ?)', array($feedurl, $feedtitle, $feeddate));
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
         $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		return $query->execute();
+		return $query->execute()->count();
 		
 		
 	 }
