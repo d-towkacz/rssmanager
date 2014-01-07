@@ -43,11 +43,20 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
          return $query->execute();
      }
 	 public function createFeed($feedurl, $feedtitle, $feeddate) {
-	    $query = $this->createQuery();
-		$query->statement('INSERT INTO tx_q8yrssmanager_domain_model_rssmanager (feedurl, feedtitle, feeddate) VALUES (?, ?, ?)', array($feedurl, $feedtitle, $feeddate));
-		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-        $query->getQuerySettings()->setReturnRawQueryResult(FALSE);
-		return $query->execute()->toArray();
+	    //$query = $this->createQuery();
+	    $feedData = array(
+	    	'feedurl' => $feedurl,
+	    	'feedtitle' => $feedtitle,
+	    	'feeddate' => $feeddate
+	    );
+	    $GLOBALS['TYPO3_DB']->exec_INSERquery(
+    		'tx_q8yrssmanager_domain_model_rssmanager',
+    		$feedData
+		);
+		//$query->statement('INSERT INTO tx_q8yrssmanager_domain_model_rssmanager (feedurl, feedtitle, feeddate) VALUES (?, ?, ?)', array($feedurl, $feedtitle, $feeddate));
+		//$query->getQuerySettings()->setRespectStoragePage(FALSE);
+        //$query->getQuerySettings()->setReturnRawQueryResult(FALSE);
+		return true;
 		
 		
 	 }
