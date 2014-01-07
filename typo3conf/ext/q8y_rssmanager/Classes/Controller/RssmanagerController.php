@@ -67,7 +67,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		foreach ($out_feed_list as $item) {
 		    $feed = new \SimplePie;
 		    $feed->set_feed_url($item['feedurl']);
-		    $feed->strip_htmltags(array('blink', 'font', 'marquee', 'div', 'img'));
+		    $feed->strip_htmltags(array('blink', 'marquee','img'));
 		    $feed->init();
 		    $feed->handle_content_type();
 		    $out_records_list[$num_chanel]['title'] = $feed->get_title();
@@ -77,7 +77,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    {
 				$out_records_list[$num_chanel]['records'][$num_record]['title'] = $item->get_title();
 				$out_records_list[$num_chanel]['records'][$num_record]['link'] = $item->get_link();
-				$out_records_list[$num_chanel]['records'][$num_record]['description'] = $item->get_description();
+				$out_records_list[$num_chanel]['records'][$num_record]['description'] = strip_tags($item->get_description());
 				$out_records_list[$num_chanel]['records'][$num_record]['date'] = $item->get_date();
 				$num_record++;
 		    }
