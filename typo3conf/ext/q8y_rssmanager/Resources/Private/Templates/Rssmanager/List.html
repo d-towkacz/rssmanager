@@ -54,7 +54,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					</div>
 					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
-						<h5><a href="#">{it.title}</a></h5>
+						<h5><a href="{it.link}">{it.title}</a></h5>
 						<p class="date">{it.date}</p>
 						<p>{it.description}</p>
 					</div>
