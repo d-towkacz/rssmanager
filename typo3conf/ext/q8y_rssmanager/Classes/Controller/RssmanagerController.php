@@ -67,8 +67,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		foreach ($out_feed_list as $item) {
 		    $feed = new \SimplePie;
 		    $feed->set_feed_url($item['feedurl']);
+		    $feed->strip_htmltags(array('blink', 'font', 'marquee', 'div', 'img'));
 		    $feed->init();
-		    
+		    $feed->handle_content_type();
 		    $out_records_list[$num_chanel]['title'] = $feed->get_title();
 		    $out_records_list[$num_chanel]['uid'] = $item['uid'];
 		    $out_records_list[$num_chanel]['records'] = array();
