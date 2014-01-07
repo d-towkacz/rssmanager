@@ -83,7 +83,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		
 		//exit;
 		
-		
+		$this->view->assign('rssrecords', $out_records_list);
 		$this->view->assign('rssmanagers', $out_feed_list);
 	}
 
