@@ -53,10 +53,11 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
     		'tx_q8yrssmanager_domain_model_rssmanager',
     		$feedData
 		);
+		$lastID=$GLOBALS['TYPO3_DB']->sql_insert_id();
 		//$query->statement('INSERT INTO tx_q8yrssmanager_domain_model_rssmanager (feedurl, feedtitle, feeddate) VALUES (?, ?, ?)', array($feedurl, $feedtitle, $feeddate));
 		//$query->getQuerySettings()->setRespectStoragePage(FALSE);
         //$query->getQuerySettings()->setReturnRawQueryResult(FALSE);
-		return true;
+		return $lastID;
 		
 		
 	 }
