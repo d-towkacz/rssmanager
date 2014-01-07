@@ -46,7 +46,33 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function listAction() {
 		//$rssmanagers = $this->rssmanagerRepository->findAll();
-		$this->view->assign('rssmanagers', $rssmanagers);
+		
+		//$feed = new \SimplePie;
+		//$feed->set_feed_url($feed_url);
+		//$feed->init();
+		$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
+		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
+		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
+		$userData = $repoUser->findUser($feuser_uid);
+		$userData = $userData[0];	
+		print_r($userData);
+		exit;
+		$feed_uids = explode(',',$userData['feed_uids']);
+		
+		$out_feed_list = $repoFeed->findListFeeds($feed_uids);
+		
+		$out_records_list = array();
+		foreach ($out_feed_list as $item) {
+		    $feed = new \SimplePie;
+		    $feed->set_feed_url($item['feedurl']);
+		    $feed->init();
+			//print_r($feed);
+		}
+		
+		//exit;
+		
+		
+		$this->view->assign('rssmanagers', $out_feed_list);
 	}
 
 	/**
@@ -80,26 +106,38 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	public function createAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager) {
 		$feed_url = $newRssmanager->getFeedurl();
 		$feed = new \SimplePie;
-		
-		
 		$feed->set_feed_url($feed_url);
 		$feed->init();
 		
 		if ($feed->error == "")
 		{
 			$feed_link = $feed->get_link();
+			$feed_title = $feed->get_title();
 			//print_r($feed_link);
 			$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
 			$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
 			$feed_exist = $repoFeed->findFeed($feed_link);
+			$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
 			if (count($feed_exist) > 0)
 			{
 				$feed_uid = $feed_exist[0]['uid'];
-				$userData = $repoUser->findUser(11316);
-				print_r($userData);
+				$userData = $repoUser->findUser($feuser_uid);
+				$userData = $userData[0];
+				$feed_uids = explode(',',$userData['feed_uids']);
+				$feed_uids[] = $feed_uid;
+				$feed_uids = array_unique($feed_uids);
+				$feed_uids_str = implode(',',$feed_uids);
+				//print_r($userData['feed_uids']);
+				//exit;
+				@$repoUser->updateUser($feuser_uid,$feed_uids_str);
 			}
 			else
 			{
+				//$newFeed = new \TYPO3\Q8yRssmanager\Domain\Model\Rssmanager;
+				//$repoSave = $repoFeed->get('TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository');
+				@$repoFeed->createFeed($feed_link, $feed_title, 0);
+				//print_r($repoFeed->add($newFeed));
+				exit;
 				
 			}
 			

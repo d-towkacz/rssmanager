@@ -16,6 +16,19 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
          $querySettings->setRespectSysLanguage(FALSE);
          $this->setDefaultQuerySettings($querySettings);
      }
+	 
+	
+	 
+	 public function findListFeeds($feeds) {
+         $query = $this->createQuery();
+         $query->getQuerySettings()->setRespectStoragePage(FALSE);
+         $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+         $query->matching(
+		 $query->in('uid', $feeds)
+		 );
+         return $query->execute();
+     }
+	 
   
      public function findFeed($url) {
          $query = $this->createQuery();
@@ -29,6 +42,15 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
     );
          return $query->execute();
      }
+	 public function createFeed($feedurl, $feedtitle, $feeddate) {
+	    $query = $this->createQuery();
+		$query->statement('INSERT INTO tx_q8yrssmanager_domain_model_rssmanager (feedurl, feedtitle, feeddate) VALUES (?, ?, ?)', array($feedurl, $feedtitle, $feeddate));
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+        $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		return $query->execute();
+		
+		
+	 }
  }
 
 ?>
