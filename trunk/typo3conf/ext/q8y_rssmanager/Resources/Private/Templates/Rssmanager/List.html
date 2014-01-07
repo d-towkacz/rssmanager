@@ -50,7 +50,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <div class="content__tab-desc tab{rssrecord.uid}">
 					<div class="content__header-title">
 						<span>{rssrecord.title}</span>
-						<a href="#" class="del-ico"></a>
+						<f:link.action action="new" class="del-ico"></f:link.action><!-- a href="#" class="del-ico"></a -->
 					</div>
 					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
