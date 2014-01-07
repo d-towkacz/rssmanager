@@ -50,6 +50,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		//$feed = new \SimplePie;
 		//$feed->set_feed_url($feed_url);
 		//$feed->init();
+		
 		$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
 		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
 		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
@@ -69,6 +70,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    $feed->set_feed_url($item['feedurl']);
 		    $feed->set_cache_location(PATH_site.'typo3temp');
 		    $feed->enable_cache();
+		    $feed->set_cache_duration(18000);
 		    $feed->strip_htmltags(array('blink', 'marquee','img'));
 		    $feed->init();
 		    $feed->handle_content_type();
@@ -123,6 +125,11 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	public function createAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager) {
 		$feed_url = $newRssmanager->getFeedurl();
+		if ($feed_url == "")
+		{
+			$this->flashMessageContainer->add('RSS-Liste wurde aktualisiert.');
+			$this->redirect('list');
+		}
 		$feed = new \SimplePie;
 		$feed->set_feed_url($feed_url);
 		$feed->init();
@@ -166,11 +173,11 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				
 			}
 			
-			$this->flashMessageContainer->add('RSS feed is added.');
+			$this->flashMessageContainer->add('RSS-Feed hinzugefügt wurde.');
 			$this->redirect('list');
 			
 		} else {
-			$this->flashMessageContainer->add('This Feed could not be read. Please check your URL.');
+			$this->flashMessageContainer->add('Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.');
 			$this->redirect('list');
 		}
 	}
@@ -197,7 +204,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				//exit;
 		$repoUser->updateUser($feuser_uid,$feed_uids_str);
 		
-		$this->flashMessageContainer->add('RSS feed was removed.');
+		$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.');
 		$this->redirect('list');
 	}
 
