@@ -49,7 +49,7 @@ namespace TYPO3\Q8yRssmanager\Domain\Repository;
 	    	'feedtitle' => $feedtitle,
 	    	'feeddate' => $feeddate
 	    );
-	    $GLOBALS['TYPO3_DB']->exec_INSERquery(
+	    $GLOBALS['TYPO3_DB']->exec_INSERTquery(
     		'tx_q8yrssmanager_domain_model_rssmanager',
     		$feedData
 		);
