@@ -164,7 +164,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		//print_r($feed);
 		//exit;
 		//$this->rssmanagerRepository->add($newRssmanager);
-		$this->flashMessageContainer->add('Your new Rssmanager was created.');
+		//$this->flashMessageContainer->add('Your new Rssmanager was created.');
 		$this->redirect('list');
 	}
 
