@@ -40,6 +40,6 @@ CREATE TABLE tx_q8yrssmanager_domain_model_rssmanager (
 
 );
 
-CREATE TABLE fe_user (
-   feed_uid int(11) DEFAULT '0' NOT NULL,
+CREATE TABLE fe_users (
+   feed_uids varchar(555) DEFAULT '' NOT NULL,
 );
