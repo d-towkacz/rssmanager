@@ -59,6 +59,10 @@ class Rssmanager extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return \string $feedurl
 	 */
+	 
+	public function getFeedUid() {
+		return $this->uid;
+	} 
 	public function getFeedurl() {
 		return $this->feedurl;
 	}
