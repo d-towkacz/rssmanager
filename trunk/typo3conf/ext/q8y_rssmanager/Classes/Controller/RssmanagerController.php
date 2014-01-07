@@ -159,8 +159,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				$feed_uids = explode(',',$userData['feed_uids']);
 				$feed_uids[] = $feed_uid;
 				$feed_uids = array_unique($feed_uids);
-				$repoUser->updateUser($feuser_uid,$feed_uids_str);
 				$feed_uids_str = implode(',',$feed_uids);
+				$repoUser->updateUser($feuser_uid,$feed_uids_str);
 				//print_r($repoFeed->add($newFeed));
 				//exit;
 				
