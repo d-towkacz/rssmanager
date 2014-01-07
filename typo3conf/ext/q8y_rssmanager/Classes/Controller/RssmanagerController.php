@@ -153,7 +153,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			{
 				//$newFeed = new \TYPO3\Q8yRssmanager\Domain\Model\Rssmanager;
 				//$repoSave = $repoFeed->get('TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository');
-				$repoFeed->createFeed($feed_link, $feed_title, 0);
+				print_r($repoFeed->createFeed($feed_link, $feed_title, 0));
+				exit;
 				//print_r($repoFeed->add($newFeed));
 				//exit;
 				
