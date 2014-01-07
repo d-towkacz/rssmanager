@@ -13,14 +13,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="main">
 
-
+<div class="errors-flash">
 <f:flashMessages />
-
+</div>
 
 
 
 <div class="content__panel-blue panel">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, est, vel.</p>
+					<p><f:translate key="tx_q8yrssmanager_domain_model_rssmanager.info" /></p>
 					<f:form action="create"  name="newRssmanager" object="{newRssmanager}">
 					<f:render partial="Rssmanager/FormFields" />
 						<!-- f:form.submit value="Create new" / -->
@@ -54,7 +54,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 					</div>
 					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
-						<h5><a href="{it.link}">{it.title}</a></h5>
+						<h5><a href="{it.link}" target="_blank">{it.title}</a></h5>
 						<p class="date">{it.date}</p>
 						<p>{it.description}</p>
 					</div>
