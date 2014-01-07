@@ -147,13 +147,13 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				$feed_uids_str = implode(',',$feed_uids);
 				//print_r($userData['feed_uids']);
 				//exit;
-				@$repoUser->updateUser($feuser_uid,$feed_uids_str);
+				$repoUser->updateUser($feuser_uid,$feed_uids_str);
 			}
 			else
 			{
 				//$newFeed = new \TYPO3\Q8yRssmanager\Domain\Model\Rssmanager;
 				//$repoSave = $repoFeed->get('TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository');
-				@$repoFeed->createFeed($feed_link, $feed_title, 0);
+				$repoFeed->createFeed($feed_link, $feed_title, 0);
 				//print_r($repoFeed->add($newFeed));
 				//exit;
 				
