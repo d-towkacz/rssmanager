@@ -55,17 +55,29 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
 		$userData = $repoUser->findUser($feuser_uid);
 		$userData = $userData[0];	
-		print_r($userData);
-		exit;
+		//print_r($userData);
+		//exit;
 		$feed_uids = explode(',',$userData['feed_uids']);
 		
 		$out_feed_list = $repoFeed->findListFeeds($feed_uids);
 		
 		$out_records_list = array();
+		$num_chanel = 0;
+		$num_record = 0;
 		foreach ($out_feed_list as $item) {
 		    $feed = new \SimplePie;
 		    $feed->set_feed_url($item['feedurl']);
 		    $feed->init();
+		    
+		    $out_records_list[$num_chanel]['title'] = $feed->get_title();
+		    $out_records_list[$num_chanel]['uid'] = $item['uid'];
+		    $out_records_list[$num_chanel]['records'] = array();
+		    foreach ($feed->get_items() as $item)
+		    {
+				$out_records_list[$num_chanel]['records'][$num_record]['title'] = $item->get_title();
+				$out_records_list[$num_chanel]['records'][$num_record]['description'] = $item->get_description();
+				$out_records_list[$num_chanel]['records'][$num_record]['date'] = $item->get_date();
+		    }
 			//print_r($feed);
 		}
 		
