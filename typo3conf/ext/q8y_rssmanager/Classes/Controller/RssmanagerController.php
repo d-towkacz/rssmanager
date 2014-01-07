@@ -160,13 +160,13 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				
 			}
 			
+			$this->flashMessageContainer->add('RSS feed is added.');
+			$this->redirect('list');
 			
+		} else {
+			$this->flashMessageContainer->add('This Feed could not be read. Please check your URL.');
+			$this->redirect('list');
 		}
-		//print_r($feed);
-		//exit;
-		//$this->rssmanagerRepository->add($newRssmanager);
-		$this->flashMessageContainer->add('Your new Rssmanager was created.');
-		$this->redirect('list');
 	}
 
 	/**
@@ -176,8 +176,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return void
 	 */
 	public function deleteAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $rssmanager) {
-		$this->rssmanagerRepository->remove($rssmanager);
-		$this->flashMessageContainer->add('Your Rssmanager was removed.');
+		//$this->rssmanagerRepository->remove($rssmanager);
+		
+		$this->flashMessageContainer->add('RSS feed was removed.');
 		$this->redirect('list');
 	}
 
