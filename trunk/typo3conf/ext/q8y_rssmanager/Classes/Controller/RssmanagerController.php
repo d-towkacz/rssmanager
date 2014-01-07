@@ -67,7 +67,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		foreach ($out_feed_list as $item) {
 		    $feed = new \SimplePie;
 		    $feed->set_feed_url($item['feedurl']);
-		    $feed->set_cache_location(PATH_site.'/tmp');
+		    $feed->set_cache_location(PATH_site.'typo3temp');
 		    $feed->enable_cache();
 		    $feed->strip_htmltags(array('blink', 'marquee','img'));
 		    $feed->init();
