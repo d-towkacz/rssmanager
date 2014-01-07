@@ -34,11 +34,20 @@ class UserRepository extends \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRe
      }
 	
     public function updateUser($uid, $feed_uid) {
-         $query = $this->createQuery();
-		 $query->statement('UPDATE fe_users set feed_uids = ? WHERE uid=?', array($feed_uid, $uid));
-         $query->getQuerySettings()->setRespectStoragePage(FALSE);
-         $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-         @$query->execute();
+         //$query = $this->createQuery();
+		 //$query->statement('UPDATE fe_users set feed_uids = ? WHERE uid=?', array($feed_uid, $uid));
+         //$query->getQuerySettings()->setRespectStoragePage(FALSE);
+         //$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+         //@$query->execute();
+         $userData = array(
+         	'feed_uids' => $feed_uid
+         );
+         $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+    	 	'fe_users',
+    		'uid = '.$uid,
+    		$userData
+		 );
+         
 		 //$query->equals("uid",$uid);
          return true;
      }	
