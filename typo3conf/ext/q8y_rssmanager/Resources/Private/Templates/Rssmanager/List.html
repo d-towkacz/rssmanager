@@ -52,11 +52,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 						<span>{rssrecord.title}</span>
 						<a href="#" class="del-ico"></a>
 					</div>
+					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
-						<h5><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h5>
-						<p class="date">Donnerstag, 1. August 2013 13:34</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, natus, placeat omnis perferendis quaerat quae corporis nihil consequatur rerum ratione cum voluptas illo magnam ducimus voluptatibus nobis ea dolores nulla mollitia sunt est rem quos fugit nisi eaque nostrum tempore.</p>
+						<h5><a href="#">{it.title}</a></h5>
+						<p class="date">{it.date}</p>
+						<p>{it.description}</p>
 					</div>
+					</f:for>
 </div>
 </f:for>
 <!-- table  class="tx_q8yrssmanager" >
