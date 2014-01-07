@@ -182,7 +182,22 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 * @return void
 	 */
 	public function deleteAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $rssmanager) {
+		$uid = $rssmanager->getFeedUid();
+		print_r($uid);
+		exit;
 		//$this->rssmanagerRepository->remove($rssmanager);
+		$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
+		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
+				$userData = $repoUser->findUser($feuser_uid);
+				$userData = $userData[0];
+				$feed_uids = explode(',',$userData['feed_uids']);
+				$feed_uids = array_diff($feed_uids, array(''));
+				//$feed_uids[] = $feed_uid;
+				$feed_uids = array_unique($feed_uids);
+				$feed_uids_str = implode(',',$feed_uids);
+				//print_r($userData['feed_uids']);
+				//exit;
+		$repoUser->updateUser($feuser_uid,$feed_uids_str);
 		
 		$this->flashMessageContainer->add('RSS feed was removed.');
 		$this->redirect('list');
