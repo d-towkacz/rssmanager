@@ -204,7 +204,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				//exit;
 		$repoUser->updateUser($feuser_uid,$feed_uids_str);
 		
-		$this->flashMessageContainer->add('<div data-alert class="alert-box">RSS-Feed wurde gelöscht.<a href="#" class="close">&times;</a></div>');
+		$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.','Hooray!',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
 		$this->redirect('list');
 	}
 
