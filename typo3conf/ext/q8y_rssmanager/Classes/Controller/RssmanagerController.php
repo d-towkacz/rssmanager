@@ -81,7 +81,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    {
 				$out_records_list[$num_chanel]['records'][$num_record]['title'] = $item->get_title();
 				$out_records_list[$num_chanel]['records'][$num_record]['link'] = $item->get_link();
-				$out_records_list[$num_chanel]['records'][$num_record]['description'] = html_entity_decode(strip_tags($item->get_description()));
+				$out_records_list[$num_chanel]['records'][$num_record]['description'] = htmlspecialchars_decode(strip_tags($item->get_description()));
 				$out_records_list[$num_chanel]['records'][$num_record]['date'] = $item->get_date();
 				$num_record++;
 		    }
