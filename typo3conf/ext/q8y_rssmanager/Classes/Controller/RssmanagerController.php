@@ -93,7 +93,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		}
 		
 		//exit;
-		$this->view->assign('flashmessage', "-----");
+		$flashBox = $GLOBALS["TSFE"]->fe_user->getKey("ses","flashmess"); 
+		$this->view->assign('flashmessage', $flashBox);
 		$this->view->assign('rssrecords', $out_records_list);
 		$this->view->assign('rssmanagers', $out_feed_list);
 	}
@@ -177,7 +178,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			}
 			
 			//$this->flashMessageContainer->add('RSS-Feed hinzugefügt wurde.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
-			$this->flashBox = $this->renderMessage("RSS-Feed hinzugefügt wurde.","");
+			$box = $this->renderMessage("RSS-Feed hinzugefügt wurde.","");
+			$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 			$this->redirect('list');
 			
 		} else {
