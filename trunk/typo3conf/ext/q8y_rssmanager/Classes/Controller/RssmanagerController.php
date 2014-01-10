@@ -94,6 +94,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		
 		//exit;
 		$flashBox = $GLOBALS["TSFE"]->fe_user->getKey("ses","flashmess"); 
+		$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", "");
 		$this->view->assign('flashmessage', $flashBox);
 		$this->view->assign('rssrecords', $out_records_list);
 		$this->view->assign('rssmanagers', $out_feed_list);
@@ -131,7 +132,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$feed_url = $newRssmanager->getFeedurl();
 		if ($feed_url == "")
 		{
-			$this->flashMessageContainer->add('RSS-Liste wurde aktualisiert.','',\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING);
+			//$this->flashMessageContainer->add('RSS-Liste wurde aktualisiert.','',\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING);
+			$box = $this->renderMessage("RSS-Liste wurde aktualisiert.","info");  
+		    $GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 			$this->redirect('list');
 		}
 		$feed = new \SimplePie;
@@ -184,7 +187,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			
 		} else {
 			//$this->flashMessageContainer->add('Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
-			$this->flashBox = $this->renderMessage("Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.","");  
+			$box = $this->renderMessage("Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.","warning");  
+			$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 			$this->redirect('list');
 		}
 	}
@@ -211,7 +215,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				//exit;
 		$repoUser->updateUser($feuser_uid,$feed_uids_str);
 		
-		$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+		//$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+		$box = $this->renderMessage("RSS-Feed wurde gelöscht.","info");  
+		$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 		$this->redirect('list');
 	}
 	
