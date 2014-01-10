@@ -44,6 +44,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 *
 	 * @return void
 	 */
+	 
+	public $flashBox = ""; 
+	 
 	public function listAction() {
 		//$rssmanagers = $this->rssmanagerRepository->findAll();
 		
@@ -90,7 +93,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		}
 		
 		//exit;
-		
+		$this->view->assign('flashmessage', $this->flashBox);
 		$this->view->assign('rssrecords', $out_records_list);
 		$this->view->assign('rssmanagers', $out_feed_list);
 	}
@@ -127,7 +130,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$feed_url = $newRssmanager->getFeedurl();
 		if ($feed_url == "")
 		{
-			$this->flashMessageContainer->add('RSS-Liste wurde aktualisiert.');
+			$this->flashMessageContainer->add('RSS-Liste wurde aktualisiert.','',\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING);
 			$this->redirect('list');
 		}
 		$feed = new \SimplePie;
@@ -173,11 +176,13 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				
 			}
 			
-			$this->flashMessageContainer->add('RSS-Feed hinzugefügt wurde.');
+			//$this->flashMessageContainer->add('RSS-Feed hinzugefügt wurde.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+			$this->flashBox = $this->renderMessage("RSS-Feed hinzugefügt wurde.","");
 			$this->redirect('list');
 			
 		} else {
-			$this->flashMessageContainer->add('Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.');
+			//$this->flashMessageContainer->add('Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+			$this->flashBox = $this->renderMessage("Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.","");  
 			$this->redirect('list');
 		}
 	}
@@ -204,8 +209,15 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				//exit;
 		$repoUser->updateUser($feuser_uid,$feed_uids_str);
 		
-		$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.','Hooray!',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
+		$this->flashMessageContainer->add('RSS-Feed wurde gelöscht.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
 		$this->redirect('list');
+	}
+	
+	public function renderMessage($text, $type)
+	{
+	    
+	    $box = '<div data-alert="" class="alert-box '.$type.'">'.$text.'<a href="#" class="close">×</a></div>';
+	    return $box;
 	}
 
 }
