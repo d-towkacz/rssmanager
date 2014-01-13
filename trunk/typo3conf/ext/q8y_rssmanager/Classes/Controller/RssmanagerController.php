@@ -181,7 +181,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 			}
 			
 			//$this->flashMessageContainer->add('RSS-Feed hinzugefügt wurde.','',\TYPO3\CMS\Core\Messaging\FlashMessage::OK);
-			$box = $this->renderMessage("RSS-Feed hinzugefügt wurde.","");
+			$box = $this->renderMessage("RSS-Feed wurde hinzugefügt .","");
 			$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 			$this->redirect('list');
 			
