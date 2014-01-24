@@ -31,7 +31,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
 	<div class="choose-list hide">
 		<f:for each="{rssmanagers}" as="rssmanager" iteration="itemIteration">
-			<div class="item{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</div>
+			<div class="{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</div>
 		</f:for>	
 	</div>
 </div>
@@ -39,7 +39,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <div class="content__tabs hide-for-small">
 	<ul>
 		<f:for each="{rssmanagers}" as="rssmanager" iteration="itemIteration">
-			<li class="item{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</li>
+			<li class="{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</li>
 		</f:for>	
 	</ul>
 </div>
