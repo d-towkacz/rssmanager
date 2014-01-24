@@ -30,16 +30,16 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <div class="content__tabs-mobile show-for-small">
 	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
 	<div class="choose-list hide">
-		<f:for each="{rssmanagers}" as="rssmanager">
-			<div data-tab="tab1">{rssmanager.feedtitle}</div>
+		<f:for each="{rssmanagers}" as="rssmanager" >
+			<div class="item{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</div>
 		</f:for>	
 	</div>
 </div>
 
 <div class="content__tabs hide-for-small">
 	<ul>
-		<f:for each="{rssmanagers}" as="rssmanager">
-			<li data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</li>
+		<f:for each="{rssmanagers}" as="rssmanager" >
+			<li class="item{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</li>
 		</f:for>	
 	</ul>
 </div>
