@@ -54,6 +54,9 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		//$feed->set_feed_url($feed_url);
 		//$feed->init();
 		
+		
+  
+		
 		$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
 		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
 		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
@@ -143,7 +146,8 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		
 		if ($feed->error == "")
 		{
-			$feed_link = $feed->get_link();
+			//$feed_link = $feed->get_link();
+			$feed_link = $feed_url; 
 			$feed_title = $feed->get_title();
 			//print_r($feed_link);
 			$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
