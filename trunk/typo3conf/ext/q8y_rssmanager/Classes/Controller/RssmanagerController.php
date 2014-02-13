@@ -84,12 +84,13 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    $feed->strip_htmltags(array('blink', 'marquee','img'));
 		    $feed->init();
 		    $feed->handle_content_type();
-		    $feeds = $feed->get_item(1);
+		    $first_feed = $feed->get_item(0);
+		    $second_feed = $feed->get_item(0);
 		    
 				//$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
 				//$out_records_list[$num_record]['date'] = $item->get_date();
 			
-		    print_r($feeds->get_title());
+		    print_r($first_feed->get_title());
 		    exit;
 		
 		    
