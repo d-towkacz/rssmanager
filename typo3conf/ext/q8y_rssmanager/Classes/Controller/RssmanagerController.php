@@ -95,8 +95,6 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    }
 		    
 		    
-		print_r($feed);
-		exit;
 		$this->view->assign('rssrecords', $out_records_list);
 		//echo "----";
 		//exit;
