@@ -1,0 +1,71 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+		<langChildren>0</langChildren>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>Rss Manager: Plugin mode</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.rssSettings>
+						<TCEforms>
+							<onChange>reload</onChange>
+							<label>Layout</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">Aviation News (manager)</numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">Single feed</numIndex>
+										<numIndex index="1">1</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">Widget for Single feed</numIndex>
+										<numIndex index="1">2</numIndex>
+									</numIndex>
+								</items>
+								<minitems>0</minitems>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.rssSettings>
+					<settings.singlemode>
+						<TCEforms>
+							<label>RSS feed URL:</label>
+							<displayCond>FIELD:settings.rssSettings:=:1</displayCond>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</settings.singlemode>
+					<settings.widgetmode>
+						<TCEforms>
+							<label>RSS feed URL:</label>
+							<displayCond>FIELD:settings.rssSettings:=:2</displayCond>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</settings.widgetmode>
+					<settings.widgetoption>
+						<TCEforms>
+							<label>Page to Single feed:</label>
+							<displayCond>FIELD:settings.rssSettings:=:2</displayCond>
+							<config>
+								<type>input</type>
+							</config>
+						</TCEforms>
+					</settings.widgetoption>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

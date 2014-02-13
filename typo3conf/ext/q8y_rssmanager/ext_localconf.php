@@ -8,6 +8,7 @@ if (!defined('TYPO3_MODE')) {
 	'Rssmanager',
 	array(
 		'Rssmanager' => 'list, show, delete, new, create',
+		'Singlerss' => 'show',
 		
 	),
 	// non-cacheable actions

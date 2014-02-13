@@ -1,0 +1,32 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+<f:format.raw>{flashmessage}</f:format.raw>
+
+
+-------
+
+
+				
+					<f:for each="{rssrecords}" as="it">
+					<div class="content__article-item">
+						<h2><a href="{it.link}" target="_blank"><f:format.raw>{it.title}</f:format.raw></a></h2>
+						<p class="date">{it.date}</p>
+						<p>{it.description}</p>
+					</div>
+					</f:for>
+
+
+</f:section>
