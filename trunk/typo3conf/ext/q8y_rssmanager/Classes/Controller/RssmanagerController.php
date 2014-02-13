@@ -89,7 +89,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 				//$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
 				//$out_records_list[$num_record]['date'] = $item->get_date();
 			
-		    print_r($feeds);
+		    print_r($feeds->get_title());
 		    exit;
 		
 		    
