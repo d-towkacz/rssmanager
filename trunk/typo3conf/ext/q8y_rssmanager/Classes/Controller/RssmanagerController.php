@@ -46,17 +46,63 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 	 */
 	 
 	public $flashBox = ""; 
-	 
+	
+	protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
+      
+    }
+	protected function initializeAction() {
+		
+		$mode = intval($this->settings['rssSettings']);
+		if ($mode < 1)
+		{
+			//$this->actionMethodName = "listAction";
+		} else {
+			if ($mode == 1)
+			{
+				$this->actionMethodName = "singleAction";
+			} else if ($mode == 2)
+			{
+				$this->actionMethodName = "widgetAction"; 
+			}	
+		} 
+
+		
+    }
+	
+	public function singleAction()
+	{
+		
+		$feed_url = $this->settings['singlemode'];
+		$this->view->setTemplatePathAndFilename(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('q8y_rssmanager') . 'Resources/Private/Templates/Rssmanager/Single.html');
+		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository"); 
+		$out_records_list = array();
+		$num_record = 0;
+		$feed = new \SimplePie;
+		    $feed->set_feed_url($feed_url);
+		    $feed->set_cache_location(PATH_site.'typo3temp');
+		    $feed->enable_cache();
+		    $feed->set_cache_duration(18000);
+		    $feed->strip_htmltags(array('blink', 'marquee','img'));
+		    $feed->init();
+		    $feed->handle_content_type();
+		    foreach ($feed->get_items() as $item)
+		    {
+				$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
+				$out_records_list[$num_record]['link'] = $item->get_link();
+				$out_records_list[$num_record]['description'] = strip_tags(html_entity_decode ($item->get_description(), ENT_COMPAT, "UTF-8"));
+				$out_records_list[$num_record]['date'] = $item->get_date();
+				$num_record++;
+		    }
+		    
+		    
+		print_r($feed);
+		exit;
+		$this->view->assign('rssrecords', $out_records_list);
+		//echo "----";
+		//exit;
+	} 
 	public function listAction() {
-		//$rssmanagers = $this->rssmanagerRepository->findAll();
-		
-		//$feed = new \SimplePie;
-		//$feed->set_feed_url($feed_url);
-		//$feed->init();
-		
-		
-  
-		
+	
 		$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
 		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
 		$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");

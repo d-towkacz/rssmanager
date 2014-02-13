@@ -6,7 +6,17 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Rssmanager',
-	'Rss Manager'
+	'Rss Manager',
+	'',
+	array(
+		'lay 1' => 'list',
+		'lay 2' => 'list'
+	),
+	array(          // Additional configuration
+            'access'    => 'user,group',
+            'icon'      => 'EXT:q8y_rssmanager/ext_icon.gif',
+            'labels'    => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xml',
+    )        
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Rss Manager');
@@ -39,5 +49,10 @@ $TCA['tx_q8yrssmanager_domain_model_rssmanager'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_q8yrssmanager_domain_model_rssmanager.gif'
 	),
 );
+
+
+$pluginSignature = str_replace('_', '', $_EXTKEY) . '_rssmanager';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform.xml');
 
 ?>
