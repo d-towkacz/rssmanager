@@ -69,6 +69,41 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		
     }
 	
+	public function widgetAction()
+	{
+		$feed_url = $this->settings['widgetmode'];
+		$this->view->setTemplatePathAndFilename(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('q8y_rssmanager') . 'Resources/Private/Templates/Rssmanager/Widget.html');
+		$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository"); 
+		$out_records_list = array();
+		$num_record = 0;
+		$feed = new \SimplePie;
+		    $feed->set_feed_url($feed_url);
+		    $feed->set_cache_location(PATH_site.'typo3temp');
+		    $feed->enable_cache();
+		    $feed->set_cache_duration(50);
+		    $feed->strip_htmltags(array('blink', 'marquee','img'));
+		    $feed->init();
+		    $feed->handle_content_type();
+		    $feeds = $feed->get_items(0,2);
+		    
+				//$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
+				//$out_records_list[$num_record]['date'] = $item->get_date();
+			
+		    print_r($feeds);
+		    exit;
+		
+		    
+		$this->view->assign('widgettitle', $this->settings['widgettitle']);    
+		$this->view->assign('icon1', $this->settings['icon1']); 
+		$this->view->assign('icon2', $this->settings['icon2']);     
+		$this->view->assign('pidto', $this->settings['widgetoption']);
+		$this->view->assign('rsssource', $feed_url);     
+		$this->view->assign('rssrecords', $out_records_list);
+		
+		
+		
+	}	
+	
 	public function singleAction()
 	{
 		
