@@ -1,0 +1,55 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+
+<f:format.raw>{flashmessage}</f:format.raw>
+
+<style type="text/css">
+.rss-single-mode {
+	color: #0092d0;
+}
+
+
+</style>
+
+
+
+<div class="small-half-box">
+					<div class="content__header-title">
+						<span>{widgettitle}</span>
+					</div>
+					<div class="content__sidebar-item">
+						<a href="<f:uri.page pageUid="{pidto}" />" class=""><img src="{icon1}" alt=""><span>Policies &amp; Positionspapiere</span></a>
+					</div>
+					<div class="content__sidebar-item">
+						<a href="<f:uri.page pageUid="{pidto}" />" class=""><img src="{icon2}" alt=""><span>Arbeitsgruppen</span></a>
+					</div>
+</div>
+	
+
+
+
+
+
+				
+					<f:for each="{rssrecords}" as="it">
+					<div class="content__article-item">
+						<p class="date rss-single-mode">{it.date}</p>
+						<h2><a href="{it.link}" target="_blank"><f:format.raw>{it.title}</f:format.raw></a></h2>
+						<p>{it.description}</p>
+					</div>
+					</f:for>
+
+
+</f:section>
