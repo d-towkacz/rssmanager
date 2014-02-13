@@ -94,10 +94,10 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		
 		
 		$this->view->assign('first_title', html_entity_decode($first_feed->get_title()));
-		$this->view->assign('first_date', $first_feed->get_date()); 
+		$this->view->assign('first_date', $first_feed->get_date("d.m.Y H:i")); 
 		
 		$this->view->assign('second_title', html_entity_decode($second_feed->get_title()));
-		$this->view->assign('second_date', $second_feed->get_date()); 
+		$this->view->assign('second_date', $second_feed->get_date("d.m.Y H:i")); 
 		    
 		$this->view->assign('widgettitle', $this->settings['widgettitle']);    
 		$this->view->assign('icon1', $this->settings['icon1']); 
