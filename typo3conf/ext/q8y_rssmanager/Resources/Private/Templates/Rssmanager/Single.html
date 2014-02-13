@@ -16,14 +16,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:format.raw>{flashmessage}</f:format.raw>
 
 
--------
+<div class="rss-single-header">Quelle: <a href="{rsssource}">{rsssource}</a></div>
 
 
 				
 					<f:for each="{rssrecords}" as="it">
 					<div class="content__article-item">
+						<p class="date rss-single-mode">{it.date}</p>
 						<h2><a href="{it.link}" target="_blank"><f:format.raw>{it.title}</f:format.raw></a></h2>
-						<p class="date">{it.date}</p>
 						<p>{it.description}</p>
 					</div>
 					</f:for>
