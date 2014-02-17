@@ -81,22 +81,13 @@
 					</settings.widgetoption>
 					<settings.icon1>
 						<TCEforms>
-							<label>Path to first icon:</label>
+							<label>Path to icon:</label>
 							<displayCond>FIELD:settings.rssSettings:=:2</displayCond>
 							<config>
 								<type>input</type>
 							</config>
 						</TCEforms>
 					</settings.icon1>
-					<settings.icon2>
-						<TCEforms>
-							<label>Path to second icon:</label>
-							<displayCond>FIELD:settings.rssSettings:=:2</displayCond>
-							<config>
-								<type>input</type>
-							</config>
-						</TCEforms>
-					</settings.icon2>
 				</el>
 			</ROOT>
 		</sDEF>
