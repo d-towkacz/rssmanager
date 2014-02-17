@@ -46,15 +46,6 @@
 							</config>
 						</TCEforms>
 					</settings.singlemode>
-					<settings.widgettitle>
-						<TCEforms>
-							<label>Widget title:</label>
-							<displayCond>FIELD:settings.rssSettings:=:2</displayCond>
-							<config>
-								<type>input</type>
-							</config>
-						</TCEforms>
-					</settings.widgettitle>
 					<settings.widgetmode>
 						<TCEforms>
 							<label>RSS feed URL:</label>
