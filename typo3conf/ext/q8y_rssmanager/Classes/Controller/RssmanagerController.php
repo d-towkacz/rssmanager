@@ -85,7 +85,7 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		    $feed->init();
 		    $feed->handle_content_type();
 		    $first_feed = $feed->get_item(0);
-		    $second_feed = $feed->get_item(1);
+		    //$second_feed = $feed->get_item(1);
 		    
 				//$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
 				//$out_records_list[$num_record]['date'] = $item->get_date();
@@ -96,12 +96,12 @@ class RssmanagerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContr
 		$this->view->assign('first_title', html_entity_decode($first_feed->get_title()));
 		$this->view->assign('first_date', $first_feed->get_date("d.m.Y H:i")); 
 		
-		$this->view->assign('second_title', html_entity_decode($second_feed->get_title()));
-		$this->view->assign('second_date', $second_feed->get_date("d.m.Y H:i")); 
+		//$this->view->assign('second_title', html_entity_decode($second_feed->get_title()));
+		//$this->view->assign('second_date', $second_feed->get_date("d.m.Y H:i")); 
 		    
 		$this->view->assign('widgettitle', $this->settings['widgettitle']);    
 		$this->view->assign('icon1', $this->settings['icon1']); 
-		$this->view->assign('icon2', $this->settings['icon2']);     
+		//$this->view->assign('icon2', $this->settings['icon2']);     
 		$this->view->assign('pidto', $this->settings['widgetoption']);
 		$this->view->assign('rsssource', $feed_url);     
 		$this->view->assign('rssrecords', $out_records_list);
