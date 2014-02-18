@@ -6,7 +6,12 @@ plugin.tx_q8yrssmanager {
 		partialRootPath = EXT:q8y_rssmanager/Resources/Private/Partials/
 		# cat=plugin.tx_q8yrssmanager/file; type=string; label=Path to template layouts (FE)
 		layoutRootPath = EXT:q8y_rssmanager/Resources/Private/Layouts/
+		singleLayout = Resources/Private/Templates/Rssmanager/Single.html
+		widgetLayout = Resources/Private/Templates/Rssmanager/Widget.html
 	}
+	
+	
+	
 	persistence {
 		# cat=plugin.tx_q8yrssmanager//a; type=string; label=Default storage PID
 		storagePid =

@@ -28,6 +28,7 @@ namespace TYPO3\Q8yRssmanager\Domain\Model;
  *
  *
  * @package q8y_rssmanager
+ * @author d.towkacz@quintinity.de
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
