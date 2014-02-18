@@ -73,6 +73,7 @@
 
 		public function widgetAction()
 		{	
+			
 			$modeSettings = $this->settings['widgetMode'];
 			$feed_url = $this->settings['widgetmode'];
 			$this->view->setTemplatePathAndFilename(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('q8y_rssmanager').$modeSettings['layoutTemplate']);

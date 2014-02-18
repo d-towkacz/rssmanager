@@ -17,13 +17,13 @@ plugin.tx_q8yrssmanager {
 		managerMode {
 			layoutTemplate = {$plugin.tx_q8yrssmanager.view.managerView}
 			cacheTime = 360
-			formatDate = 
+			formatDate = l, d. F Y H:i
 		}
 	
 		singleMode {
 	    	layoutTemplate = {$plugin.tx_q8yrssmanager.view.singleLayout}
 			cacheTime = 80
-			formatDate = 
+			formatDate = l, d. F Y H:i
 		}
 	
 		widgetMode {
