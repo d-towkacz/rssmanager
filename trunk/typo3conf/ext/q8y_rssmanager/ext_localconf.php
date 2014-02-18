@@ -7,14 +7,12 @@ if (!defined('TYPO3_MODE')) {
 	'TYPO3.' . $_EXTKEY,
 	'Rssmanager',
 	array(
-		'Rssmanager' => 'list, show, delete, new, create',
-		'Singlerss' => 'show',
+		'Rssmanager' => 'list, show, delete, new, create, widget, single',
 		
 	),
 	// non-cacheable actions
 	array(
-		'Rssmanager' => 'list, show, delete, new, create',
-		
+		'Rssmanager' => 'list, show, delete, new, create, widget, single',
 	)
 );
 

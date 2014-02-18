@@ -8,45 +8,46 @@ plugin.tx_q8yrssmanager {
 		storagePid = {$plugin.tx_q8yrssmanager.persistence.storagePid}
 		
 	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
-	}
+	settings {
+		application {
+			cachePath = typo3temp/
+			convertEncoding = UTF-8
+		}
+	
+		managerMode {
+			layoutTemplate = {$plugin.tx_q8yrssmanager.view.managerView}
+			cacheTime = 360
+			formatDate = 
+		}
+	
+		singleMode {
+	    	layoutTemplate = {$plugin.tx_q8yrssmanager.view.singleLayout}
+			cacheTime = 80
+			formatDate = 
+		}
+	
+		widgetMode {
+	    	layoutTemplate = {$plugin.tx_q8yrssmanager.view.widgetLayout}
+			cacheTime = 80
+			formatDate = d.m.Y H:i
+		}
+	  
+	}	
 }
 
 plugin.tx_q8yrssmanager._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
+	.rss-single-mode {
+		color: #0092d0;
 	}
-
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-q8y-rssmanager table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-q8y-rssmanager table th {
-		font-weight:bold;
-	}
-
-	.tx-q8y-rssmanager table td {
-		vertical-align:top;
+	.no-bottom {
+		margin-bottom:0px !important;
 	}
 )
-
-config.tx_extbase.persistence.classes {
-\TYPO3\Q8yRssmanager\Domain\Model\User {
-	 mapping {
-                    tableName = fe_users
-                    columns {
-                          #first_name.mapOnProperty = firstName
-                          name.mapOnProperty = name
-                    }
-                }
-       }
+plugin.tx_q8yrssmanager._LOCAL_LANG.default {
+    actualCreate = RSS-Liste wurde aktualisiert.
+    infoCreate = RSS-Feed wurde hinzugefügt.
+    errorCreate = Wir konnten keinen RSS-Feed unter dieser URL finden. Bitte überprüfen Sie Ihre Angaben.
+    
+    infoDelete = RSS-Feed wurde gelöscht.
+    
 }
