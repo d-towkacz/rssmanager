@@ -159,7 +159,13 @@
 				$feed->set_feed_url($item['feedurl']);
 				$feed->set_cache_location(PATH_site.$this->settings['application']['cachePath']);
 				$feed->enable_cache();
-				$feed->set_cache_duration(intval($modeSettings['cacheTime']));
+				if ($GLOBALS["TSFE"]->fe_user->getKey("ses","purgecache") == "clear")
+				{
+					$feed->set_cache_duration(0);	
+					$GLOBALS['TSFE']->fe_user->setKey("ses","purgecache", "");
+				} else {
+					$feed->set_cache_duration(intval($modeSettings['cacheTime']));	
+				}
 				$feed->strip_htmltags(array('blink', 'marquee','img'));
 				$feed->init();
 				$feed->handle_content_type();
@@ -219,6 +225,7 @@
 			{
 				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("actualCreate"),"info");  
 				$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
+				$GLOBALS['TSFE']->fe_user->setKey("ses","purgecache", "clear");
 				$this->redirect('list');
 			}
 
