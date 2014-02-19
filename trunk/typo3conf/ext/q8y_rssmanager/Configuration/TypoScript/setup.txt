@@ -36,12 +36,9 @@ plugin.tx_q8yrssmanager {
 }
 
 plugin.tx_q8yrssmanager._CSS_DEFAULT_STYLE (
-	.rss-single-mode {
-		color: #0092d0;
-	}
-	.no-bottom {
-		margin-bottom:0px !important;
-	}
+
+
+
 )
 plugin.tx_q8yrssmanager._LOCAL_LANG.default {
     actualCreate = RSS-Liste wurde aktualisiert.
