@@ -89,7 +89,7 @@
 			$feed->init();
 			$feed->handle_content_type();
 			$first_feed = $feed->get_item(0);
-			//$second_feed = $feed->get_item(1);
+			$second_feed = $feed->get_item(1);
 
 			//$out_records_list[$num_record]['title'] = html_entity_decode($item->get_title());
 			//$out_records_list[$num_record]['date'] = $item->get_date();
@@ -97,8 +97,8 @@
 			$this->view->assign('first_title', html_entity_decode($first_feed->get_title()));
 			$this->view->assign('first_date', $first_feed->get_date($modeSettings['formatDate'])); 
 
-			//$this->view->assign('second_title', html_entity_decode($second_feed->get_title()));
-			//$this->view->assign('second_date', $second_feed->get_date("d.m.Y H:i")); 
+			$this->view->assign('second_title', html_entity_decode($second_feed->get_title()));
+			$this->view->assign('second_date', $second_feed->get_date($modeSettings['formatDate'])); 
 
 			//$this->view->assign('widgettitle', $this->settings['widgettitle']);    
 			$this->view->assign('icon1', $this->settings['icon1']); 
