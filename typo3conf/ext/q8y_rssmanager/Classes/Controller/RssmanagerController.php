@@ -220,8 +220,9 @@
 		* @param \TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager
 		* @return void
 		*/
-		public function createAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager) {
+		public function createAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $newRssmanager = NULL) {
 			$feed_url = $newRssmanager->getFeedurl();
+
 			if ($feed_url == "")
 			{
 				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("actualCreate"),"info");  
@@ -273,6 +274,77 @@
 				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("errorCreate"),"warning");  
 				$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
 				$this->redirect('list');
+			
+			}
+		}
+
+
+
+		public function addurlAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $rssmanager) {
+			//$feed_url = $rssmanager->getFeedurl();
+			$req = $this->request->getArguments();
+			$feed_url = $req['feedurl'];
+			
+			if ($feed_url == "")
+			{
+				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("actualCreate"),"info");  
+				$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
+				$GLOBALS['TSFE']->fe_user->setKey("ses","purgecache", "clear");
+				$this->redirect('list');
+			}
+
+			/* Init SimplePie RSS parser*/
+			$feed = new \SimplePie;
+			$feed->set_feed_url($feed_url);
+			$feed->init();
+
+			if ($feed->error == "")
+			{
+				$feed_link = $feed_url; 
+				$feed_title = $feed->get_title();
+				$repoFeed = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\RssmanagerRepository");
+				$repoUser = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance("TYPO3\Q8yRssmanager\Domain\Repository\UserRepository");
+				$feed_exist = $repoFeed->findFeed($feed_link);
+				$feuser_uid = $GLOBALS['TSFE']->fe_user->user['uid'];
+				if (count($feed_exist) > 0)
+				{
+					$feed_uid = $feed_exist[0]['uid'];
+					$userData = $repoUser->findUser($feuser_uid);
+					$userData = $userData[0];
+					$feed_uids = explode(',',$userData['feed_uids']);
+					$feed_uids[] = $feed_uid;
+					$feed_uids = array_unique($feed_uids);
+					$feed_uids_str = implode(',',$feed_uids);
+					$repoUser->updateUser($feuser_uid,$feed_uids_str);
+				}
+				else
+				{
+					$feed_uid = $repoFeed->createFeed($feed_link, $feed_title, 0);
+					$userData = $repoUser->findUser($feuser_uid);
+					$userData = $userData[0];
+					$feed_uids = explode(',',$userData['feed_uids']);
+					$feed_uids[] = $feed_uid;
+					$feed_uids = array_unique($feed_uids);
+					$feed_uids_str = implode(',',$feed_uids);
+					$repoUser->updateUser($feuser_uid,$feed_uids_str);		
+				}
+				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("infoCreate"),"");
+				$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
+				$this->uriBuilder->setTargetPageUid(342);
+
+			$link = $this->uriBuilder->build();
+			$this->redirectToUri($link);
+				//$this->redirect('list');
+
+			} else {
+				$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("errorCreate"),"warning");  
+				$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
+				$this->uriBuilder->setTargetPageUid(342);
+
+			$link = $this->uriBuilder->build();
+			$this->redirectToUri($link);
+				//$this->redirect('list');
+			
 			}
 		}
 
@@ -296,7 +368,10 @@
 			$repoUser->updateUser($feuser_uid,$feed_uids_str);
 			$box = $this->renderMessage(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate("infoDelete"),"info");  
 			$GLOBALS['TSFE']->fe_user->setKey("ses","flashmess", $box);
-			$this->redirect('list');
+			$this->uriBuilder->setTargetPageUid(342);
+
+			$link = $this->uriBuilder->build();
+			$this->redirectToUri($link);
 		}
 
 		public function renderMessage($text, $type)

@@ -13,25 +13,48 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="main">
 
-<f:format.raw>{flashmessage}</f:format.raw>
+<!-- f:format.raw>{flashmessage}</f:format.raw -->
 
 <script type="text/javascript">
-jQuery(document).ready(function(){
-	jQuery(".active").click();
-});
+//jQuery(document).ready(function(){
+//	jQuery(".active").click();
+//	jQuery(".choose-list div:eq(0)").click();
+//	jQuery(".choose-list div:eq(0)").click();
+//});
 </script>
 
-<div class="content__panel-blue panel">
-					<p>Fügen Sie weitere, eigene Nachrichtenkanäle hinzu. Sie brauchen nur die URL des RSS Feeds</p>
-					<f:form action="create"  name="newRssmanager" object="{newRssmanager}">
-					<f:render partial="Rssmanager/FormFields" />
-						<!-- f:form.submit value="Create new" / -->
-					</f:form>
-					
+
+
+
+
+ <div style="width: 100%;height: 40px;">
+	<f:link.page pageUid="342" class="settings-ico">Einstellungen</f:link.page>
 </div>
 
+<f:if condition="{settings.rssSettings} == '3'">
+	<f:then>
 
-<div class="content__tabs-mobile show-for-small">
+	<div class="content__tabs-mobile show">
+	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
+	<div class="choose-list hide">
+		<f:for each="{rssmanagers}" as="rssmanager" iteration="itemIteration">
+			<div class="{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</div>
+		</f:for>	
+	</div>
+</div>
+
+<div class="content__tabs hide">
+	<ul>
+		<f:for each="{rssmanagers}" as="rssmanager" iteration="itemIteration">
+			<li class="{f:if(condition: itemIteration.isFirst, then: 'active')}" data-tab="tab{rssmanager.uid}">{rssmanager.feedtitle}</li>
+		</f:for>	
+	</ul>
+</div>
+	
+	</f:then>
+  	<f:else>
+
+  	<div class="content__tabs-mobile show-for-small">
 	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
 	<div class="choose-list hide">
 		<f:for each="{rssmanagers}" as="rssmanager" iteration="itemIteration">
@@ -47,12 +70,56 @@ jQuery(document).ready(function(){
 		</f:for>	
 	</ul>
 </div>
+  	
+  	</f:else>
+</f:if>
 
-<f:for each="{rssrecords}" as="rssrecord">
+
+
+
+
+
+<f:if condition="{settings.rssSettings} == '3'">
+
+<f:then>
+
+
+<f:for each="{rssrecords}" as="rssrecord" >
+
+
+
 <div class="content__tab-desc tab{rssrecord.uid}">
 					<div class="content__header-title">
 						<span>{rssrecord.title}</span>
-						<f:link.action action="delete" class="del-ico" arguments="{rssmanager:rssrecord.uid}"></f:link.action><!-- a href="#" class="del-ico"></a -->
+						<!-- a href="#" class="del-ico"></a -->
+					</div>
+					<f:for each="{rssrecord.records}" as="it" iteration="iter">
+					<f:if condition="{iter.index} < 3">
+			
+					<div class="content__article-item">
+						<h2><a href="{it.link}" target="_blank"><f:format.raw>{it.title}</f:format.raw></a></h2>
+						<p class="date">{it.date}</p>
+						<p>{it.description}</p>
+					</div>
+					</f:if>
+					</f:for>
+</div>
+
+
+</f:for>
+
+
+
+</f:then>
+<f:else>
+
+
+<f:for each="{rssrecords}" as="rssrecord">
+
+<div class="content__tab-desc tab{rssrecord.uid}">
+					<div class="content__header-title">
+						<span>{rssrecord.title}</span>
+						<!-- a href="#" class="del-ico"></a -->
 					</div>
 					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
@@ -62,7 +129,22 @@ jQuery(document).ready(function(){
 					</div>
 					</f:for>
 </div>
+
 </f:for>
+
+
+</f:else>
+</f:if>
+
+
+
+
+
+<f:if condition="{settings.rssSettings} == '3'">
+<p>
+	<f:link.page pageUid="{settings.columnoption}" class="more-rss-link" >weitere Nachrichten >></f:link.page>
+</p>
+</f:if>
 <!-- table  class="tx_q8yrssmanager" >
 	<tr>
 		<th><f:translate key="tx_q8yrssmanager_domain_model_rssmanager.feedurl" /></th>
