@@ -132,10 +132,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:for each="{rssrecords}" as="rssrecord">
 
 <div class="content__tab-desc tab{rssrecord.uid}">
-					<div class="content__header-title">
+					<!--div class="content__header-title">
 						<span>{rssrecord.title}</span>
-						<!-- a href="#" class="del-ico"></a -->
-					</div>
+
+					</div -->
 					<f:for each="{rssrecord.records}" as="it">
 					<div class="content__article-item">
 						<h2><a href="{it.link}" target="_blank"><f:format.raw>{it.title}</f:format.raw></a></h2>
@@ -156,8 +156,8 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 
 <f:if condition="{settings.rssSettings} == '3'">
-<p>
-	<f:link.page pageUid="{settings.columnoption}" class="more-rss-link" >weitere Nachrichten >></f:link.page>
+<p style="text-align:right;">
+	<f:link.page pageUid="{settings.columnoption}" class="more-rss-link" >weitere Nachrichten »</f:link.page>
 </p>
 </f:if>
 <!-- table  class="tx_q8yrssmanager" >
