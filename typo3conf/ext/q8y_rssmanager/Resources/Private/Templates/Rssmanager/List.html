@@ -27,18 +27,21 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 
 
- <div style="width: 100%;height: 40px;">
-<div class="content__header-title">
-	<span>AVIATION NEWS</span>					
-</div>
 
-	<f:link.page pageUid="342" class="settings-ico">Einstellungen</f:link.page>
-</div>
+
+
+
 
 
 
 <f:if condition="{settings.rssSettings} == '3'">
 	<f:then>
+	
+	<div class="content__header-title">
+	<span>AVIATION NEWS</span>	
+	
+	<f:link.page pageUid="342" class="settings-ico">Einstellungen</f:link.page>				
+</div>
 
 	<div class="content__tabs-mobile show">
 	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
@@ -59,6 +62,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	
 	</f:then>
   	<f:else>
+  	
+  	
+  	<div class="content__header-title">
+		
+	
+	<f:link.page pageUid="342" class="settings-ico">Einstellungen</f:link.page>				
+</div>
 
   	<div class="content__tabs-mobile show-for-small">
 	<div class="choose-field"><i class="icon-chevron-down"></i><span>Aktuell</span></div>
