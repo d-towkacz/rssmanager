@@ -28,8 +28,14 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 
  <div style="width: 100%;height: 40px;">
+<div class="content__header-title">
+	<span>AVIATION NEWS</span>					
+</div>
+
 	<f:link.page pageUid="342" class="settings-ico">Einstellungen</f:link.page>
 </div>
+
+
 
 <f:if condition="{settings.rssSettings} == '3'">
 	<f:then>
@@ -89,10 +95,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 
 <div class="content__tab-desc tab{rssrecord.uid}">
-					<div class="content__header-title">
+					<!-- div class="content__header-title">
 						<span>{rssrecord.title}</span>
-						<!-- a href="#" class="del-ico"></a -->
-					</div>
+						
+					</div -->
 					<f:for each="{rssrecord.records}" as="it" iteration="iter">
 					<f:if condition="{iter.index} < 3">
 			
