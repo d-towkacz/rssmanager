@@ -280,7 +280,7 @@
 
 
 
-		public function addurlAction(\TYPO3\Q8yRssmanager\Domain\Model\Rssmanager $rssmanager) {
+		public function addurlAction() {
 			//$feed_url = $rssmanager->getFeedurl();
 			$req = $this->request->getArguments();
 			$feed_url = $req['feedurl'];
